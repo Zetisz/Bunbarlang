@@ -22,7 +22,7 @@
             bool playAgain = true;
 			while (playAgain)
 			{
-				logger.LogColorfulHashtags();
+				logger.LogColorfulHashtags(5);
 
 				// Fogadás elhelyezése
 				player.ShowBalance();
@@ -79,7 +79,7 @@
 				bettingTable.BJ_AddBet(bet);
 
                 // Verseny indítása
-                logger.LogColorfulHashtags();
+                logger.LogColorfulHashtags(10);
 				logger.LogStartRace();
 				Horse winner = race.StartRace();
 

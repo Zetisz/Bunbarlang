@@ -1,9 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 namespace Bunbarlang
 {
 	internal class Kartya
@@ -25,24 +19,25 @@ namespace Bunbarlang
 		
 		public Szin szin { get; } 
 		public Szam szam { get; } 
+		public int Ertek { get; }
 		public Kartya(Szin szin, Szam szam) 
 		{ 
 			this.szin = szin; 
 			this.szam = szam; 
+			this.Ertek = PontErtek(szam);
 		}        
-			
-		//public string SzamString { get => szamString; set => szamString = value; }
-
+		
 		// Kártya értékének visszaadása
-		public int kartyaErtek()
+		public int PontErtek(Szam szam)
 		{
-			if ((int)szam >= 11 && (int)szam <= 13) return 10; // Bubi, Dáma, Király
-			if ((int)szam == 14) return 11; // Ász
-			return (int)szam;
+			int pont = (int)szam;
+			if ((int)szam >= 11 && (int)szam <= 13) pont = 10; // Bubi, Dáma, Király
+			if ((int)szam == 14) pont = 11; // Ász
+			return pont;
 		}
 		public override string ToString() 
 		{ 
-			return $"{szin}-{szam}"; 
+			return $"{szin}-{szam} ({Ertek})"; 
 		}
 		public static List<Kartya> PakliLetrehozas()
 		{

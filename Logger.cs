@@ -55,12 +55,12 @@ namespace Bunbarlang
 			}
 		}
 
-		public void LogColorfulHashtags()
+		public void LogColorfulHashtags(int num)
 		{
 			string[] colors = new string[] { "Cyan", "Magenta", "Yellow", "Green", "Red" };
 			Random rand = new Random();
 
-			for (int i = 0; i < 10; i++) // 10 színes hashtag
+			for (int i = 0; i < num; i++) // amennyit megadunk
 			{
 				string color = colors[rand.Next(colors.Length)];
 				Console.ForegroundColor = (ConsoleColor)Enum.Parse(typeof(ConsoleColor), color);

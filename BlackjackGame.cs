@@ -11,12 +11,12 @@
  
             while (playAgain)
             {
-	            
 				bool jatekosMegall = false;
 				bool jatekosBust = false;
 				string userResponse;
 				jatekosKartyai.Clear();
 				osztoKartyai.Clear();
+				logger.LogColorfulHashtags(5);
 
 				// Játékos fogadása
 				decimal betAmount = 0;
@@ -42,6 +42,7 @@
 
 				//Játékos lapjai
 				
+				logger.LogColorfulHashtags(3);
 				jatekosKartyai = Player.Osztas(pakli);
 				logger.Log("--------Játékos kártyái----------", ConsoleColor.Blue);
 				foreach (Kartya k in jatekosKartyai)
@@ -52,6 +53,7 @@
  
 				 // Osztó lapjai
 	            
+	            logger.LogColorfulHashtags(3);
 				osztoKartyai = Oszto.Osztas(pakli);
 				logger.Log("--------Osztó kártyái----------", ConsoleColor.DarkGreen);
 				Console.WriteLine(osztoKartyai[0]);
@@ -63,7 +65,8 @@
 				{
 				    logger.Log("\nAkarsz lapot húzni Igen(1) Nem(2)", ConsoleColor.Cyan);
 				    int input = Convert.ToInt32(Console.ReadLine()); 
-
+				    logger.LogColorfulHashtags(3);
+				    
 				    if (input == 1)
 				    {
 				        Console.WriteLine("\n--------Lap húzás----------");
@@ -76,7 +79,7 @@
 				        if (currentTotal > 21)
 				        {
 				            jatekosBust = true;
-				            break; // Exit the drawing loop
+				            break; // loop kilépés
 				        }
 				    }
 				    else if (input == 2)
@@ -93,6 +96,7 @@
 				    Console.WriteLine($"\nOsztó rejtett kártyája: {osztoKartyai[1]}");
 				    while (Oszto.LapOsszeg(osztoKartyai, true) < 17)
 				    {
+					    logger.LogColorfulHashtags(3);
 				        Console.WriteLine("\n-----------Osztó lapot húz-----------");
 				        Kartya ujLap = Oszto.LapKeres(pakli);
 				        osztoKartyai.Add(ujLap);
@@ -103,16 +107,17 @@
 				    int osztoPont = Oszto.LapOsszeg(osztoKartyai, true);
 
 				    Console.WriteLine($"\nOsztó lapjainak értéke: {osztoPont}");
+				    logger.LogColorfulHashtags(3);
 
 				    // Win/Loss Logic
 				    if (osztoPont > 21 || jatekosPont > osztoPont)
 				    {
-				        Console.WriteLine("Nyertél!!!");
+				        logger.Log("Nyertél!!!",  ConsoleColor.Green);
 				        bettingTable.BlackjackPayout(player, logger, true);
 				    }
 				    else if (jatekosPont < osztoPont)
 				    {
-				        Console.WriteLine("Vesztettél!!!");
+				        logger.Log("Vesztettél!!!",   ConsoleColor.Red);
 				        bettingTable.BlackjackPayout(player, logger, false);
 				    }
 				    else
@@ -122,11 +127,11 @@
 				}
 				else
 				{
-				    Console.WriteLine("Vesztettél!!! (Bust)");
+				    logger.Log("Vesztettél!!! (Bust)",  ConsoleColor.Red);
 				    bettingTable.BlackjackPayout(player, logger, false);
 				}
 
-				// Global Restart logic (only once at the bottom)
+				// újrakezdés
 				bettingTable.ResetBet();
 				userResponse = bettingTable.Restart(player);
 				if (userResponse == "exit") return false;

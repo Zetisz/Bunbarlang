@@ -47,7 +47,7 @@ namespace Bunbarlang
             {
 	            foreach (var item in osztoKartyai)
 	            {
-		            osszeg += (int)item.szam;
+		            osszeg += (int)item.Ertek;
 
 		            if (item.szam == Kartya.Szam.Ász) {
 			            aszDb++; 
@@ -56,7 +56,7 @@ namespace Bunbarlang
             }
             else
             {
-	            osszeg = (int)osztoKartyai[0].szam;
+	            osszeg = osztoKartyai[0].Ertek;
 	            if (osztoKartyai[0].szam == Kartya.Szam.Ász) {
 		            aszDb++; 
 	            }
