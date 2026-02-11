@@ -38,17 +38,28 @@ namespace Bunbarlang
             return lap;
         } 
 
-		public static int LapOsszeg(List<Kartya> osztoKartyai) 
+		public static int LapOsszeg(List<Kartya> osztoKartyai, bool mutat) 
         {
             int osszeg = 0;
             int aszDb =  0;
-            foreach (var item in osztoKartyai)
-            {
-                osszeg += (int)item.szam;
 
-                if (item.szam == Kartya.Szam.Ász) {
-                    aszDb++; 
-                }
+            if (mutat)
+            {
+	            foreach (var item in osztoKartyai)
+	            {
+		            osszeg += (int)item.szam;
+
+		            if (item.szam == Kartya.Szam.Ász) {
+			            aszDb++; 
+		            }
+	            }
+            }
+            else
+            {
+	            osszeg = (int)osztoKartyai[0].szam;
+	            if (osztoKartyai[0].szam == Kartya.Szam.Ász) {
+		            aszDb++; 
+	            }
             }
 
             while (osszeg > 21 && aszDb > 0)

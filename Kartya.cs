@@ -19,21 +19,10 @@ namespace Bunbarlang
 
 		public enum Szam
 		{
-			Kettő = 2,
-			Három = 3,
-			Négy = 4,
-			Öt = 5,
-			Hat = 6,
-			Hét = 7,
-			Nyolc = 8,
-			Kilenc = 9,
-			Tíz = 10,
-			Király = 10,
-			Bubi = 10,
-			Dáma = 10,
-			Ász = 11
+			Kettő = 2, Három, Négy, Öt, Hat, Hét, Nyolc, Kilenc, Tíz,
+			Bubi, Dáma, Király, Ász
 		}
-
+		
 		public Szin szin { get; } 
 		public Szam szam { get; } 
 		public Kartya(Szin szin, Szam szam) 
@@ -45,10 +34,12 @@ namespace Bunbarlang
 		//public string SzamString { get => szamString; set => szamString = value; }
 
 		// Kártya értékének visszaadása
-		public int kartyaErtek() 
-		{ 
-			return (int)szam; 
-		} 
+		public int kartyaErtek()
+		{
+			if ((int)szam >= 11 && (int)szam <= 13) return 10; // Bubi, Dáma, Király
+			if ((int)szam == 14) return 11; // Ász
+			return (int)szam;
+		}
 		public override string ToString() 
 		{ 
 			return $"{szin}-{szam}"; 

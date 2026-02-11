@@ -64,7 +64,7 @@
 			int aszDb = 0;
 			foreach (var item in jatekosKartyai)
 			{
-				osszeg += (int)item.szam;
+				osszeg += item.kartyaErtek(); // Use the method, not the cast
 
 				if (item.szam == Kartya.Szam.Ász)
 				{

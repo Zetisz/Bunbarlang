@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Bunbarlang")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+5b54f1e6a1be0f3c27c3d8db2c3504507ff467fd")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+a9690fd7414386a0efb8e12317026ca58f21fe04")]
 [assembly: System.Reflection.AssemblyProductAttribute("Bunbarlang")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Bunbarlang")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

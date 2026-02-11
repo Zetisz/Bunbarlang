@@ -33,17 +33,19 @@
 
 		public string Restart(Player player)
 		{
+			string response = "";
 			if (player.Balance > 0)
 			{
 				Console.WriteLine("Szeretnél újra játszani? (igen/nem)");
-				string userResponse = Console.ReadLine()!.ToLower();
-				return userResponse;
+				response = Console.ReadLine()!.ToLower();
 			}
 			else
 			{
 				logger.Log("Elbuktad az összes pénzedet: a játéknak vége!", ConsoleColor.DarkRed);
-				return "exit";
+				response = "exit";
 			}
+
+			return response;
 		}
 
         private ConsoleColor GetBetColor(Horse horse)

@@ -1,18 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Bunbarlang
+﻿namespace Bunbarlang
 {
 	internal class HorseRacing
 	{
 		public static bool Game(Player player, Logger logger, Pool bettingTable)
 		{
-			
 
+			bool bukta = false;
 			// Lovak hozzáadása
 			List<Horse> horses =
 			[
@@ -48,7 +41,7 @@ namespace Bunbarlang
                     else
                     {
                         // fallback color if parsing fails
-                        logger.Log($"{i + 1}. {horses[i].Name}", ConsoleColor.White);
+                        logger.Log($"{i + 1}. {horses[i].Name}");
                     }
                 }
 
@@ -65,16 +58,21 @@ namespace Bunbarlang
 				}
 
 				// Játékos fogadása
-				decimal betAmount;
-				while (true)
+				decimal betAmount = 0;
+				
+				do
 				{
-					Console.Write("Mekkora összeget szeretnél fogadni? ");
-					if (decimal.TryParse(Console.ReadLine(), out betAmount) && betAmount <= player.Balance && betAmount > 0)
+					if (betAmount == 0)
+						Console.Write("Mekkora összeget szeretnél fogadni? (Min: 100) ");
+					else
 					{
-						break; // Érvényes fogadási összeg
+						logger.Log(
+							"Érvénytelen összeg. Kérlek, adj meg egy érvényes fogadási összeget, ami nem haladja meg az egyenlegedet.",
+							ConsoleColor.DarkRed);
 					}
-					Console.WriteLine("Érvénytelen összeg. Kérlek, adj meg egy érvényes fogadási összeget, ami nem haladja meg az egyenlegedet.");
-				}
+
+					betAmount = decimal.Parse(Console.ReadLine()!);
+				} while (betAmount < 100 || betAmount > player.Balance);
 
 				// Fogadás elhelyezése
 				Bet bet = new(horses[horseChoice - 1], betAmount);
@@ -96,15 +94,17 @@ namespace Bunbarlang
 				if (userResponse != "igen" && userResponse != "i")
 				{
 					Console.WriteLine("Köszönjük, hogy játszottál! Viszlát!");
-					return true;
+					bukta = true;
+					playAgain = false;
 				}
-				else
+				if (userResponse == "exit")
 				{
-					return false;
+					bukta = false;
+					playAgain = false;
 				}
 			}
 
-			return true;
+			return bukta;
 		}
 	}
 }

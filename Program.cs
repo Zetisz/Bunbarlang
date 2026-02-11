@@ -30,10 +30,10 @@
 						playAgain = HorseRacing.Game(player, logger, bettingTable);
 						break;
 					case 2:
-						playAgain = Blackjack_Game.Game(player, pakli, logger, bettingTable);
+						playAgain = BlackjackGame.Game(player, pakli, logger, bettingTable);
 						break;
 					case 3:
-						Environment.Exit(0);
+						playAgain = false;
 						break;
 				}
 			}
