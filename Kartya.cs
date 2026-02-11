@@ -12,26 +12,26 @@ namespace Bunbarlang
 		public enum Szin
 		{
 			Pikk,
-			Kor,
+			Kör,
 			Treff,
-			Karo
+			Káró
 		}
 
 		public enum Szam
 		{
-			Ketto = 2,
-			Harom = 3,
-			Negy = 4,
-			Ot = 5,
+			Kettő = 2,
+			Három = 3,
+			Négy = 4,
+			Öt = 5,
 			Hat = 6,
-			Het = 7,
+			Hét = 7,
 			Nyolc = 8,
 			Kilenc = 9,
-			Tiz = 10,
-			Kiraly = 10,
+			Tíz = 10,
+			Király = 10,
 			Bubi = 10,
-			Dama = 10,
-			Asz = 11
+			Dáma = 10,
+			Ász = 11
 		}
 
 		public Szin szin { get; } 

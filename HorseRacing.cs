@@ -34,7 +34,7 @@ namespace Bunbarlang
 				// Fogadás elhelyezése
 				player.ShowBalance();
 
-				Console.WriteLine("Melyik lóval szeretnél fogadni? Válassz számot a listából:");
+				Console.WriteLine("Melyik lóra szeretnél fogadni? Válassz számot a listából:");
 
                 // Lovak kiírása számozva
                 for (int i = 0; i < horses.Count; i++)
@@ -91,21 +91,15 @@ namespace Bunbarlang
 				player.ShowBalance();
 				race.Reset(horses);
 				bettingTable.ResetBet();
-
-                // Kérdés, hogy újra akar játszani
-                if (player.Balance > 0)
+				string userResponse = bettingTable.Restart(player);
+				
+				if (userResponse != "igen" && userResponse != "i")
 				{
-                    Console.WriteLine("Szeretnél újra játszani? (igen/nem)");
-                    string userResponse = Console.ReadLine()!.ToLower();
-                    if (userResponse != "igen" && userResponse != "i")
-                    {
-                        Console.WriteLine("Köszönjük, hogy játszottál! Viszlát!");
-						return;
-                    }
-                }
+					Console.WriteLine("Köszönjük, hogy játszottál! Viszlát!");
+					return;
+				}
 				else
 				{
-					Console.WriteLine("Elbuktad az összes pénzedet: a játéknak vége!");
 					Environment.Exit(0);
 				}
 			}

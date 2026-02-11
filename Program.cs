@@ -12,14 +12,14 @@
 			int cmd = 0;
 			bool playAgain = true;
 
-			Console.WriteLine("\nÜdv a BŰNBARLANGBAN!");
+			logger.Log("\nÜdv a BŰNBARLANGBAN!", ConsoleColor.Red);
 			player.ShowBalance();
 
 			while (playAgain)
 			{
 				do
 				{
-					Console.WriteLine("\nVálassz egy játékot: (1) Lóverseny (2) Blackjack (3) Kilépés");
+					logger.Log("\nVálassz egy játékot: (1) Lóverseny (2) Blackjack (3) Kilépés",  ConsoleColor.Cyan);
 					cmd = int.Parse(Console.ReadLine()!);
 				} while (cmd < 1 || cmd > 3);
 

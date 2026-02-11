@@ -66,7 +66,7 @@
 			{
 				osszeg += (int)item.szam;
 
-				if (item.szam == Kartya.Szam.Asz)
+				if (item.szam == Kartya.Szam.Ász)
 				{
 					aszDb++;
 				}

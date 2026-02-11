@@ -18,6 +18,7 @@
 				bool isWin = false;
 				bool jatekosMegall = false;
 				bool isDraw = false;
+				string userResponse;
 
 				// Játékos fogadása
 				decimal betAmount;
@@ -30,7 +31,7 @@
 					{
 						break; // Érvényes fogadási összeg
 					}
-					Console.WriteLine("Érvénytelen összeg. Kérlek, adj meg egy érvényes fogadási összeget, ami nem haladja meg az egyenlegedet.");
+					logger.Log("Érvénytelen összeg. Kérlek, adj meg egy érvényes fogadási összeget, ami nem haladja meg az egyenlegedet.", ConsoleColor.DarkRed);
 				}
 
 				// Fogadás elhelyezése
@@ -41,7 +42,7 @@
 				List<Kartya> jatekosKartyai = new List<Kartya>();
 				jatekosKartyai = Player.Osztas(pakli);
                 int jatekosLapErtek = Player.LapOsszeg(jatekosKartyai);
-				Console.WriteLine("--------Játékos kártyái----------");
+				logger.Log("--------Játékos kártyái----------", ConsoleColor.Blue);
 				foreach (Kartya k in jatekosKartyai)
 				{
 					Console.WriteLine(k);
@@ -53,7 +54,7 @@
 				List<Kartya> osztoKartyai = new List<Kartya>();
 				osztoKartyai = Oszto.Osztas(pakli);
                 int osztoLapErtek = Oszto.LapOsszeg(osztoKartyai);
-				Console.WriteLine("--------Osztó kártyái----------");
+				logger.Log("--------Osztó kártyái----------", ConsoleColor.DarkGreen);
 				foreach (Kartya k in osztoKartyai)
 				{
 					Console.WriteLine(k);
@@ -68,11 +69,27 @@
                     if (input == 1)
                     {
                         // Lap húzás
-                        Console.WriteLine("--------Lap húzás----------");
+                        Console.WriteLine("\n--------Lap húzás----------");
                         Kartya ul = Player.LapKeres(pakli);
                         jatekosKartyai.Add(ul);
                         Console.WriteLine(ul);
                         Console.WriteLine($"\nJátékos lapjainak értéke: {Player.LapOsszeg(jatekosKartyai)}");
+                        if (21 <= Player.LapOsszeg(jatekosKartyai))
+                        {
+	                        Console.WriteLine("Vesztettél!!!");
+	                        bettingTable.BlackjackPayout(player, logger, false);
+	                        
+	                        userResponse = bettingTable.Restart(player);
+	                        if (userResponse != "igen" && userResponse != "i")
+	                        {
+		                        Console.WriteLine("Köszönjük, hogy játszottál! Viszlát!");
+		                        return;
+	                        }
+	                        else
+	                        {
+		                        Environment.Exit(0);
+	                        }
+                        }
     
                     }
                     else if (input == 2)
@@ -88,7 +105,7 @@
                 }
 				//Osztó lapjai
                 while(Oszto.LapOsszeg(osztoKartyai) < 17) {
-                    Console.WriteLine("-----------Osztó lapot húz-----------");
+                    Console.WriteLine("\n-----------Osztó lapot húz-----------");
                     Kartya uj_lap = Oszto.LapKeres(pakli);
                     osztoKartyai.Add(uj_lap);
                     Console.WriteLine("Osztó húz: " + uj_lap);
@@ -138,19 +155,14 @@
 				bettingTable.ResetBet();
 
 				// Kérdés, hogy újra akar játszani
-				if (player.Balance > 0)
+				userResponse = bettingTable.Restart(player);
+				if (userResponse != "igen" && userResponse != "i")
 				{
-					Console.WriteLine("Szeretnél újra játszani? (igen/nem)");
-					string userResponse = Console.ReadLine()!.ToLower();
-					if (userResponse != "igen" && userResponse != "i")
-					{
-						Console.WriteLine("Köszönjük, hogy játszottál! Viszlát!");
-						return;
-					}
+					Console.WriteLine("Köszönjük, hogy játszottál! Viszlát!");
+					return;
 				}
 				else
 				{
-					logger.Log("Elbuktad az összes pénzedet: a játéknak vége!", ConsoleColor.DarkRed);
 					Environment.Exit(0);
 				}
 			}

@@ -31,6 +31,21 @@
             Bets.Clear();
         }
 
+		public string Restart(Player player)
+		{
+			if (player.Balance > 0)
+			{
+				Console.WriteLine("Szeretnél újra játszani? (igen/nem)");
+				string userResponse = Console.ReadLine()!.ToLower();
+				return userResponse;
+			}
+			else
+			{
+				logger.Log("Elbuktad az összes pénzedet: a játéknak vége!", ConsoleColor.DarkRed);
+				return "exit";
+			}
+		}
+
         private ConsoleColor GetBetColor(Horse horse)
 		{
 			// Színkódok a lovakhoz

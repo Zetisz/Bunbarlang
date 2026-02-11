@@ -12,3 +12,4 @@
 /Users/zwti/Downloads/bun/Bunbarlang/obj/Debug/net9.0/Bunbarlang.pdb
 /Users/zwti/Downloads/bun/Bunbarlang/obj/Debug/net9.0/Bunbarlang.genruntimeconfig.cache
 /Users/zwti/Downloads/bun/Bunbarlang/obj/Debug/net9.0/ref/Bunbarlang.dll
+/Users/zwti/Downloads/bun/Bunbarlang/obj/Debug/net9.0/Bunbarlang.sourcelink.json
