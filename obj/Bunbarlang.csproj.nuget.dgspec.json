@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/Users/zwti/Downloads/bun/Bunbarlang/Bunbarlang.csproj": {}
+    "/Users/zwti/Documents/School/bogdan/Bunbarlang/Bunbarlang.csproj": {}
   },
   "projects": {
-    "/Users/zwti/Downloads/bun/Bunbarlang/Bunbarlang.csproj": {
+    "/Users/zwti/Documents/School/bogdan/Bunbarlang/Bunbarlang.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/zwti/Downloads/bun/Bunbarlang/Bunbarlang.csproj",
+        "projectUniqueName": "/Users/zwti/Documents/School/bogdan/Bunbarlang/Bunbarlang.csproj",
         "projectName": "Bunbarlang",
-        "projectPath": "/Users/zwti/Downloads/bun/Bunbarlang/Bunbarlang.csproj",
+        "projectPath": "/Users/zwti/Documents/School/bogdan/Bunbarlang/Bunbarlang.csproj",
         "packagesPath": "/Users/zwti/.nuget/packages/",
-        "outputPath": "/Users/zwti/Downloads/bun/Bunbarlang/obj/",
+        "outputPath": "/Users/zwti/Documents/School/bogdan/Bunbarlang/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/Users/zwti/.nuget/NuGet/NuGet.Config"

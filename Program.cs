@@ -27,10 +27,10 @@
 				switch (cmd)
 				{
 					case 1:
-						HorseRacing.Game(player, logger, bettingTable);
+						playAgain = HorseRacing.Game(player, logger, bettingTable);
 						break;
 					case 2:
-						Blackjack_Game.Game(player, pakli, logger, bettingTable);
+						playAgain = Blackjack_Game.Game(player, pakli, logger, bettingTable);
 						break;
 					case 3:
 						Environment.Exit(0);

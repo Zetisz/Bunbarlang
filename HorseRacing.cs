@@ -9,7 +9,7 @@ namespace Bunbarlang
 {
 	internal class HorseRacing
 	{
-		public static void Game(Player player, Logger logger, Pool bettingTable)
+		public static bool Game(Player player, Logger logger, Pool bettingTable)
 		{
 			
 
@@ -96,13 +96,15 @@ namespace Bunbarlang
 				if (userResponse != "igen" && userResponse != "i")
 				{
 					Console.WriteLine("Köszönjük, hogy játszottál! Viszlát!");
-					return;
+					return true;
 				}
 				else
 				{
-					Environment.Exit(0);
+					return false;
 				}
 			}
+
+			return true;
 		}
 	}
 }

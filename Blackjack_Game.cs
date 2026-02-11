@@ -2,7 +2,7 @@
 {
     internal class Blackjack_Game
     {
-        public static void Game(Player player, List<Kartya> pakli, Logger logger, Pool bettingTable)
+        public static bool Game(Player player, List<Kartya> pakli, Logger logger, Pool bettingTable)
         {
             /*foreach (Kartya k in pakli)
             {
@@ -83,11 +83,11 @@
 	                        if (userResponse != "igen" && userResponse != "i")
 	                        {
 		                        Console.WriteLine("Köszönjük, hogy játszottál! Viszlát!");
-		                        return;
+		                        return true;
 	                        }
 	                        else
 	                        {
-		                        Environment.Exit(0);
+		                        return false;
 	                        }
                         }
     
@@ -159,14 +159,15 @@
 				if (userResponse != "igen" && userResponse != "i")
 				{
 					Console.WriteLine("Köszönjük, hogy játszottál! Viszlát!");
-					return;
+					return true;
 				}
 				else
 				{
-					Environment.Exit(0);
+					return false;
 				}
 			}
-            
-		}
+
+            return true;
+        }
     }
 }
