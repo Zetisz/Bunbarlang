@@ -9,11 +9,11 @@
 			// Lovak hozzáadása
 			List<Horse> horses =
 			[
-				new Horse("Daiwa Scarlet", 1m, 10, "Red"),
-				new Horse("Seiun Sky", 2.5m, 8, "Blue"),
-				new Horse("Gold Ship", 1.5m, 9, "Yellow"),
-				new Horse("Silence Suzuka", 1m, 10, "Green"),
-				new Horse("Special Week", 3m, 8, "White")
+				new("Daiwa Scarlet", 1m, 10, "Red"),
+				new("Seiun Sky", 2.5m, 8, "Blue"),
+				new("Gold Ship", 1.5m, 9, "Yellow"),
+				new("Silence Suzuka", 1m, 10, "Green"),
+				new("Special Week", 3m, 8, "White")
 			];
 
 			Race race = new(horses, logger);
@@ -26,68 +26,26 @@
 
 				// Fogadás elhelyezése
 				player.ShowBalance();
-
 				Console.WriteLine("Melyik lóra szeretnél fogadni? Válassz számot a listából:");
 
-                // Lovak kiírása számozva
-                for (int i = 0; i < horses.Count; i++)
-                {
-                    string color = horses[i].Color;
-
-                    if (Enum.TryParse(color, true, out ConsoleColor consoleColor))
-                    {
-                        logger.Log($"{i + 1}. {horses[i].Name}", consoleColor);
-                    }
-                    else
-                    {
-                        // fallback color if parsing fails
-                        logger.Log($"{i + 1}. {horses[i].Name}");
-                    }
-                }
-
-                // Fogadás helyének kiválasztása
-                int horseChoice;
-				while (true)
-				{
-					Console.Write("Add meg a választott ló számát (1-5): ");
-					if (int.TryParse(Console.ReadLine(), out horseChoice) && horseChoice >= 1 && horseChoice <= horses.Count)
-					{
-						break; // Ha érvényes számot adott meg
-					}
-					Console.WriteLine("Érvénytelen választás. Kérlek, válassz a listából egy számot (1-5).");
-				}
-
-				// Játékos fogadása
-				decimal betAmount = 0;
+                // Fogadás
+                logger.LogHorses(horses);
+                var horseChoice = bettingTable.LoValasztas(horses);
+				var betAmount = player.Fogadas(player);
 				
-				do
-				{
-					if (betAmount == 0)
-						Console.Write("Mekkora összeget szeretnél fogadni? (Min: 100) ");
-					else
-					{
-						logger.Log(
-							"Érvénytelen összeg. Kérlek, adj meg egy érvényes fogadási összeget, ami nem haladja meg az egyenlegedet.",
-							ConsoleColor.DarkRed);
-					}
-
-					betAmount = decimal.Parse(Console.ReadLine()!);
-				} while (betAmount < 100 || betAmount > player.Balance);
-
-				// Fogadás elhelyezése
 				Bet bet = new(horses[horseChoice - 1], betAmount);
-				bettingTable.BJ_AddBet(bet);
+				bettingTable.HR_AddBet(bet);
 
                 // Verseny indítása
                 logger.LogColorfulHashtags(10);
 				logger.LogStartRace();
-				Horse winner = race.StartRace();
+				var winner = race.StartRace();
 
 				// Eredmény kifizetése
-				bettingTable.HorsePayout(player, winner, logger);
+				bettingTable.HorsePayout(player, winner);
 
 				player.ShowBalance();
-				race.Reset(horses);
+				race.Reset();
 				bettingTable.ResetBet();
 				string userResponse = bettingTable.Restart(player);
 				

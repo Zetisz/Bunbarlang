@@ -55,6 +55,23 @@ namespace Bunbarlang
 			}
 		}
 
+		public void LogHorses(List<Horse> horses)
+		{
+			for (int i = 0; i < horses.Count; i++)
+			{
+				string color = horses[i].Color;
+
+				if (Enum.TryParse(color, true, out ConsoleColor consoleColor))
+				{
+					Log($"{i + 1}. {horses[i].Name}", consoleColor);
+				}
+				else
+				{
+					Log($"{i + 1}. {horses[i].Name}");
+				}
+			}
+		}
+
 		public void LogColorfulHashtags(int num)
 		{
 			string[] colors = new string[] { "Cyan", "Magenta", "Yellow", "Green", "Red" };

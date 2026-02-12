@@ -19,22 +19,8 @@
 				logger.LogColorfulHashtags(5);
 
 				// Játékos fogadása
-				decimal betAmount = 0;
                 player.ShowBalance();
-
-                do
-                {
-	                if (betAmount == 0)
-		                Console.Write("Mekkora összeget szeretnél fogadni? (Min: 100) ");
-	                else
-	                {
-		                logger.Log(
-			                "Érvénytelen összeg. Kérlek, adj meg egy érvényes fogadási összeget, ami nem haladja meg az egyenlegedet.",
-			                ConsoleColor.DarkRed);
-	                }
-
-	                betAmount = decimal.Parse(Console.ReadLine()!);
-                } while (betAmount < 100 || betAmount > player.Balance);
+                var betAmount = player.Fogadas(player);
 
 				// Fogadás elhelyezése
 				Bet bet = new(betAmount);
@@ -51,7 +37,7 @@
 				}
 				Console.WriteLine($"\nJátékos lapjainak értéke: {Player.LapOsszeg(jatekosKartyai)}");
  
-				 // Osztó lapjai
+	            // Osztó lapjai
 	            
 	            logger.LogColorfulHashtags(3);
 				osztoKartyai = Oszto.Osztas(pakli);
@@ -109,29 +95,29 @@
 				    Console.WriteLine($"\nOsztó lapjainak értéke: {osztoPont}");
 				    logger.LogColorfulHashtags(3);
 
-				    // Win/Loss Logic
+				    // Nyerés logika
 				    if (osztoPont > 21 || jatekosPont > osztoPont)
 				    {
 				        logger.Log("Nyertél!!!",  ConsoleColor.Green);
-				        bettingTable.BlackjackPayout(player, logger, true);
+				        bettingTable.BlackjackPayout(player, true);
 				    }
 				    else if (jatekosPont < osztoPont)
 				    {
 				        logger.Log("Vesztettél!!!",   ConsoleColor.Red);
-				        bettingTable.BlackjackPayout(player, logger, false);
+				        bettingTable.BlackjackPayout(player, false);
 				    }
 				    else
 				    {
-				        Console.WriteLine("Döntetlen!!!");
+				        logger.Log("Döntetlen!!!");
 				    }
 				}
 				else
 				{
 				    logger.Log("Vesztettél!!! (Bust)",  ConsoleColor.Red);
-				    bettingTable.BlackjackPayout(player, logger, false);
+				    bettingTable.BlackjackPayout(player, false);
 				}
 
-				// újrakezdés
+				// Újrakezdés
 				bettingTable.ResetBet();
 				userResponse = bettingTable.Restart(player);
 				if (userResponse == "exit") return false;

@@ -3,40 +3,39 @@
 	internal class Player
 	{
         private decimal balance;
-		private List<Kartya> pakli;
-
-		private static Random rnd = new Random();
+		private Logger logger;
+        private static Random rnd = new Random();
 
 		public Player( decimal startingBalance, List<Kartya> pakli)
 		{
-			Balance = startingBalance;
-			this.pakli = pakli;
+			this.Balance = startingBalance;
+			this.logger = new Logger();
+			this.Pakli = pakli;
 		}
         public decimal Balance { get => balance; set => balance = value; }
-		public List<Kartya> Pakli { get => pakli; set => pakli = value; }
-
-		public bool PlaceBet(decimal amount)
-		{
-			if (Balance >= amount)
-			{
-				Balance -= amount;
-				return true;
-			}
-			else
-			{
-				Console.WriteLine("Nincs elég pénzed felrakni fogadást!");
-				return false;
-			}
-		}
-
-		public void UpdateBalance(decimal amount)
-		{
-			Balance += amount;
-		}
+		public List<Kartya> Pakli { get; set; }
 
 		public void ShowBalance()
 		{
-			Console.WriteLine($"Egyenleg: {Balance:C}");
+			logger.Log($"Egyenleg: {Balance:C}");
+		}
+
+		public decimal Fogadas(Player player)
+		{
+			decimal betAmount = 0;
+			do
+			{
+				if (betAmount == 0)
+					Console.Write("Mekkora összeget szeretnél fogadni? (Min: 100) ");
+				else
+				{
+					logger.Log("Érvénytelen összeg. Kérlek, adj meg egy érvényes fogadási összeget, ami nem haladja meg az egyenlegedet.", ConsoleColor.DarkRed);
+				}
+
+				betAmount = decimal.Parse(Console.ReadLine()!);
+			} while (betAmount < 100 || betAmount > player.Balance);
+			
+			return betAmount;
 		}
 
 		public static List<Kartya> Osztas(List<Kartya> pakli)

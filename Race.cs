@@ -5,26 +5,23 @@
 		private List<Horse> horses;
 		private Pool bettingPool;
 		private Track raceTrack;
-		private Logger logger;
-
-		// A konstruktor most már átadja a Logger példányt a Pool-nak
+		
 		public Race(List<Horse> horses, Logger logger)
 		{
 			this.horses = horses;
-			this.logger = logger;
 			bettingPool = new Pool(logger);
 			raceTrack = new Track(logger);
 		}
 
-		public Horse StartRace()
+		public Horse? StartRace()
 		{
-			Horse winner = raceTrack.StartRace(horses);
+			var winner = raceTrack.StartRace(horses);
 			return winner;
 		}
 
-        public void Reset(List<Horse> horses)
+        public void Reset()
         {
-            foreach (Horse horse in horses)
+            foreach (var horse in horses)
             {
                 horse.DistanceCovered = 0;
             }

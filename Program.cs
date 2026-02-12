@@ -2,7 +2,7 @@
 {
 	internal class Program
 	{
-		static void Main()
+		private static void Main()
 		{
 			Logger logger = new();
 			Pool bettingTable = new(logger);
@@ -13,11 +13,11 @@
 			
 			logger.LogColorfulHashtags(10);
 			logger.Log("\nÜdv a BŰNBARLANGBAN!", ConsoleColor.Red);
-			player.ShowBalance();
 
 			while (playAgain)
 			{
 				int cmd;
+				player.ShowBalance();
 				do
 				{
 					logger.Log("\nVálassz egy játékot: (1) Lóverseny (2) Blackjack (3) Kilépés",  ConsoleColor.Cyan);
