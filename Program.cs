@@ -2,14 +2,13 @@
 {
 	internal class Program
 	{
-		static void Main(string[] args)
+		static void Main()
 		{
 			Logger logger = new();
 			Pool bettingTable = new(logger);
 			List<Kartya> pakli = Kartya.PakliLetrehozas();
 			Player player = new(1000m, pakli);
-			
-			int cmd = 0;
+
 			bool playAgain = true;
 			
 			logger.LogColorfulHashtags(10);
@@ -18,6 +17,7 @@
 
 			while (playAgain)
 			{
+				int cmd;
 				do
 				{
 					logger.Log("\nVálassz egy játékot: (1) Lóverseny (2) Blackjack (3) Kilépés",  ConsoleColor.Cyan);
